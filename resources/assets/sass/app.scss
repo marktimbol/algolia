@@ -1,2 +1,14 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+.tt-menu {
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;	
+}
 
+.tt-suggestion {
+	border-bottom: 1px solid #ddd;
+	padding: 10px 5px;	
+}
+
+.tt-cursor {
+	background: #ddd;
+}

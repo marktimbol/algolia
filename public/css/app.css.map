@@ -1,1 +1,1 @@
-{"version":3,"sources":["app.css"],"names":[],"mappings":"AAAA","file":"app.css","sourceRoot":"/source/","sourcesContent":[]}
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAAA;EACI,YAAY;EACZ,kBAAkB;EAClB,uBAAuB,EAC1B;;AAED;EACC,8BAA8B;EAC9B,kBAAkB,EAClB;;AAED;EACC,iBAAiB,EACjB","file":"app.css","sourcesContent":[".tt-menu {\n    width: 100%;\n    background: white;\n    border: 1px solid #ddd;\t\n}\n\n.tt-suggestion {\n\tborder-bottom: 1px solid #ddd;\n\tpadding: 10px 5px;\t\n}\n\n.tt-cursor {\n\tbackground: #ddd;\n}"],"sourceRoot":"/source/"}

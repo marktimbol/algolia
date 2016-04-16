@@ -18,26 +18,33 @@ var Search = React.createClass({
 		index = client.initIndex('getstarted_actors');
 
 		$('.typeahead')
-			.typeahead(null, {
+			.typeahead({
+				minLength: 2,
+				highlight: true,
+			}, {
 				source: index.ttAdapter(),
 				displayKey: 'name',
+				templates: {
+					suggestion: function(hit) {
+						return (
+							'<div><p>' + hit._highlightResult.name.value + '</p></div>'
+						)
+					}
+				}
 			})
 			.on('typeahead:select', function(e, suggestion) {
 				this.setState({
 					searchKey: suggestion.name
 				});
-			}.bind(this));
-
-		index.search('', null, function(error, result) {
-		  this.setState({results: result.hits});
-		}.bind(this), { hitsPerPage: 10, page: 0 });			
+			}.bind(this));	
 	},
 
-	searchContacts(e) {
-		var searchKey = e.target.value;
-		this.setState({ searchKey });
+	handleChange(e) {
+		this.setState({ searchKey: e.target.value });
+	},
 
-		index.search(searchKey, null, function(error, result) {
+	searchContacts() {
+		index.search(this.state.searchKey, null, function(error, result) {
 		  this.setState({results: result.hits});
 		}.bind(this), { hitsPerPage: 10, page: 0 });		
 	},
@@ -49,7 +56,7 @@ var Search = React.createClass({
 			var results = this.state.results.map(function(result, index) {
 				return (
 					<div key={index}>
-						{result.name}
+						<h3>{result.name}</h3>
 					</div>	
 				)
 			});
@@ -59,10 +66,13 @@ var Search = React.createClass({
 			<div>
 				<input type="text" 
 					className="form-control typeahead" 
-					placeholder="Search contact" 
-					onChange={this.searchContacts} />
+					placeholder="Search contact"
+					onChange={this.handleChange} />
+					&nbsp;
+				<button onClick={this.searchContacts} className="btn btn-default">Search</button>
 
 				<div className="results">
+					{results}
 				</div>
 			</div>	
 		)	

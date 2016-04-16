@@ -26774,24 +26774,28 @@ var Search = React.createClass({
 		client = algoliasearch("CU6OGKCO5Z", '51b794f5a668ed95177f5a90986eff84');
 		index = client.initIndex('getstarted_actors');
 
-		$('.typeahead').typeahead(null, {
+		$('.typeahead').typeahead({
+			minLength: 2,
+			highlight: true
+		}, {
 			source: index.ttAdapter(),
-			displayKey: 'name'
+			displayKey: 'name',
+			templates: {
+				suggestion: function suggestion(hit) {
+					return '<div><p>' + hit._highlightResult.name.value + '</p></div>';
+				}
+			}
 		}).on('typeahead:select', function (e, suggestion) {
 			this.setState({
 				searchKey: suggestion.name
 			});
 		}.bind(this));
-
-		index.search('', null, function (error, result) {
-			this.setState({ results: result.hits });
-		}.bind(this), { hitsPerPage: 10, page: 0 });
 	},
-	searchContacts: function searchContacts(e) {
-		var searchKey = e.target.value;
-		this.setState({ searchKey: searchKey });
-
-		index.search(searchKey, null, function (error, result) {
+	handleChange: function handleChange(e) {
+		this.setState({ searchKey: e.target.value });
+	},
+	searchContacts: function searchContacts() {
+		index.search(this.state.searchKey, null, function (error, result) {
 			this.setState({ results: result.hits });
 		}.bind(this), { hitsPerPage: 10, page: 0 });
 	},
@@ -26802,7 +26806,11 @@ var Search = React.createClass({
 				return React.createElement(
 					'div',
 					{ key: index },
-					result.name
+					React.createElement(
+						'h3',
+						null,
+						result.name
+					)
 				);
 			});
 		}
@@ -26813,8 +26821,18 @@ var Search = React.createClass({
 			React.createElement('input', { type: 'text',
 				className: 'form-control typeahead',
 				placeholder: 'Search contact',
-				onChange: this.searchContacts }),
-			React.createElement('div', { className: 'results' })
+				onChange: this.handleChange }),
+			' ',
+			React.createElement(
+				'button',
+				{ onClick: this.searchContacts, className: 'btn btn-default' },
+				'Search'
+			),
+			React.createElement(
+				'div',
+				{ className: 'results' },
+				results
+			)
 		);
 	}
 });
