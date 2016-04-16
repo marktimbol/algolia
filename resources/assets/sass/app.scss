@@ -6,9 +6,33 @@
 
 .tt-suggestion {
 	border-bottom: 1px solid #ddd;
-	padding: 10px 5px;	
+	padding: 10px;	
 }
 
 .tt-cursor {
 	background: #ddd;
+}
+
+.twitter-typeahead {
+	width: 100%;
+}
+
+.Media {
+    display: flex;
+    align-items: center;
+    justify-content: center;	
+}
+
+.Media__figure {
+    flex: 0.4;
+    margin-right: 10px;	
+}
+
+.Media__content {
+	flex: 0.7;	
+}
+
+.Media__heading {
+    font-size: 14px;
+    margin: 0;	
 }

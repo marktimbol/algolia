@@ -5,9 +5,38 @@
 
 .tt-suggestion {
   border-bottom: 1px solid #ddd;
-  padding: 10px 5px; }
+  padding: 10px; }
 
 .tt-cursor {
   background: #ddd; }
+
+.twitter-typeahead {
+  width: 100%; }
+
+.Media {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.Media__figure {
+  -webkit-flex: 0.4;
+  -ms-flex: 0.4;
+  flex: 0.4;
+  margin-right: 10px; }
+
+.Media__content {
+  -webkit-flex: 0.7;
+  -ms-flex: 0.7;
+  flex: 0.7; }
+
+.Media__heading {
+  font-size: 14px;
+  margin: 0; }
 
 /*# sourceMappingURL=app.css.map */

@@ -26775,7 +26775,7 @@ var Search = React.createClass({
 		index = client.initIndex('dev_ALSBEEF_Burgers');
 
 		$('.typeahead').typeahead({
-			minLength: 2,
+			minLength: 1,
 			highlight: true
 		}, {
 			name: 'burgers',
@@ -26783,7 +26783,8 @@ var Search = React.createClass({
 			displayKey: 'name',
 			templates: {
 				suggestion: function suggestion(hit) {
-					return '<div><p>' + hit._highlightResult.name.value + ' - ' + hit.email + '</p></div>';
+					var imagePath = hit.image_path;
+					return '<div class="Media">' + '<div class="Media__figure">' + '<img src="' + imagePath + '" class="img-responsive" alt="" title="" />' + '</div>' + '<div class="Media__content">' + '<h3 class="Media__heading">' + hit._highlightResult.name.value + '</h3>' + '<address>' + '<p>' + hit.email + '</p>' + '<p>' + hit.phone + '</p>' + '</address>' + '</div>' + '</div>';
 				}
 			}
 		}).on('typeahead:select', function (e, suggestion) {
@@ -26818,16 +26819,24 @@ var Search = React.createClass({
 
 		return React.createElement(
 			'div',
-			null,
-			React.createElement('input', { type: 'text',
-				className: 'form-control typeahead',
-				placeholder: 'Search contact',
-				onChange: this.handleChange }),
-			' ',
+			{ className: 'col-md-6' },
 			React.createElement(
-				'button',
-				{ onClick: this.searchContacts, className: 'btn btn-default' },
-				'Search'
+				'div',
+				{ className: 'form-group' },
+				React.createElement('input', { type: 'text',
+					className: 'form-control typeahead',
+					placeholder: 'Search contact',
+					onChange: this.handleChange })
+			),
+			React.createElement(
+				'div',
+				{ className: 'form-group' },
+				React.createElement(
+					'button',
+					{ onClick: this.searchContacts, className: 'btn btn-default' },
+					React.createElement('i', { className: 'fa fa-search' }),
+					' Find them all'
+				)
 			),
 			React.createElement(
 				'div',

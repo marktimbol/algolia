@@ -19,7 +19,7 @@ var Search = React.createClass({
 
 		$('.typeahead')
 			.typeahead({
-				minLength: 2,
+				minLength: 1,
 				highlight: true,
 			}, {
 				name: 'burgers',
@@ -27,8 +27,26 @@ var Search = React.createClass({
 				displayKey: 'name',
 				templates: {
 					suggestion: function(hit) {
+						var imagePath = hit.image_path;
 						return (
-							'<div><p>' + hit._highlightResult.name.value + ' - ' + hit.email + '</p></div>'
+							'<div class="Media">' +
+								'<div class="Media__figure">' +
+									'<img src="'+imagePath+'" class="img-responsive" alt="" title="" />' +
+								'</div>' +
+
+								'<div class="Media__content">' +
+									'<h3 class="Media__heading">' + hit._highlightResult.name.value + '</h3>' +
+									'<address>' +
+										'<p>' +
+											hit.email +
+										'</p>' +
+
+										'<p>' +
+											hit.phone +
+										'</p>' +										
+									'</address>' +
+								'</div>' +
+							'</div>' 
 						)
 					}
 				}
@@ -64,18 +82,24 @@ var Search = React.createClass({
 		}
 
 		return (
-			<div>
-				<input type="text" 
-					className="form-control typeahead" 
-					placeholder="Search contact"
-					onChange={this.handleChange} />
-					&nbsp;
-				<button onClick={this.searchContacts} className="btn btn-default">Search</button>
+			<div className="col-md-6">
+				<div className="form-group">
+					<input type="text"
+						className="form-control typeahead" 
+						placeholder="Search contact"
+						onChange={this.handleChange} />
+				</div>
+
+				<div className="form-group">
+					<button onClick={this.searchContacts} className="btn btn-default">
+						<i className="fa fa-search"></i> Find them all
+					</button>
+				</div>
 
 				<div className="results">
 					{results}
 				</div>
-			</div>	
+			</div>
 		)	
 	}
 });
