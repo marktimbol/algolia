@@ -9,14 +9,10 @@ class Contact extends Model
 {
     use AlgoliaEloquentTrait;
 
-    public $algoliaSettings = [
-        'attributesToIndex' => [
-            'id', 
-            'name',
-        ],
-        'customRanking' => [
-            'desc(popularity)', 
-            'asc(name)',
-        ],
-    ];  
+    protected $fillable = ['name', 'email', 'phone', 'image_path'];
+    
+    public static $autoIndex = true;
+    public static $autoDelete = true;    
+
+    public $indices = ['dev_ALSBEEF_Burgers']; 
 }

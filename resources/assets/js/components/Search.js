@@ -15,19 +15,20 @@ var Search = React.createClass({
 
 	componentDidMount() {
 		client = algoliasearch("CU6OGKCO5Z", '51b794f5a668ed95177f5a90986eff84');
-		index = client.initIndex('getstarted_actors');
+		index = client.initIndex('dev_ALSBEEF_Burgers');
 
 		$('.typeahead')
 			.typeahead({
 				minLength: 2,
 				highlight: true,
 			}, {
+				name: 'burgers',
 				source: index.ttAdapter(),
 				displayKey: 'name',
 				templates: {
 					suggestion: function(hit) {
 						return (
-							'<div><p>' + hit._highlightResult.name.value + '</p></div>'
+							'<div><p>' + hit._highlightResult.name.value + ' - ' + hit.email + '</p></div>'
 						)
 					}
 				}

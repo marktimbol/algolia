@@ -15,7 +15,7 @@ elixir(function(mix) {
     mix.sass('app.scss')
     	.scripts([
     		bowersPath + 'jquery/dist/jquery.js',
-    		bowersPath + 'typeahead.js/dist/typeahead.bundle.js',
+    		bowersPath + 'typeahead.js/dist/typeahead.jquery.js',
     	], 'public/js/public.js')
 
     	.browserify('components/Search.js')
